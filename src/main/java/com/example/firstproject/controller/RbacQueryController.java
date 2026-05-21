@@ -6,6 +6,7 @@ import com.example.firstproject.dto.RoleDto;
 import com.example.firstproject.mapper.RbacReadMapper;
 import com.example.firstproject.security.CurrentUser;
 import com.example.firstproject.security.RequirePerm;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
@@ -37,6 +38,7 @@ public class RbacQueryController {
      *
      * @return 角色列表及总数
      */
+    @Operation(summary = "查询所有角色列表", description = "获取系统中所有已定义的角色信息")
     @GetMapping("/roles")
     @RequirePerm("user:view")
     public ApiResponse<Map<String, Object>> listRoles() {
@@ -57,6 +59,7 @@ public class RbacQueryController {
      * @param roleCode 角色编码
      * @return 该角色的权限列表
      */
+    @Operation(summary = "查询指定角色的权限", description = "获取某个角色所拥有的所有权限列表")
     @GetMapping("/roles/{roleCode}/permissions")
     @RequirePerm("user:view")
     public ApiResponse<Map<String, Object>> listRolePermissions(
@@ -80,6 +83,7 @@ public class RbacQueryController {
      * @param username 用户名
      * @return 该用户的角色列表
      */
+    @Operation(summary = "查询指定用户的角色", description = "获取某个用户被分配的所有角色")
     @GetMapping("/users/{username}/roles")
     @RequirePerm("user:view")
     public ApiResponse<Map<String, Object>> listUserRoles(
@@ -103,6 +107,7 @@ public class RbacQueryController {
      * @param username 用户名
      * @return 该用户实际生效的权限列表
      */
+    @Operation(summary = "查询指定用户的权限（已去重）", description = "获取某个用户实际拥有的所有有效权限，已按角色去重合并")
     @GetMapping("/users/{username}/permissions")
     @RequirePerm("user:view")
     public ApiResponse<Map<String, Object>> listUserPermissions(

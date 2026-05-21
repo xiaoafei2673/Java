@@ -1,5 +1,6 @@
 package com.example.firstproject.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +29,7 @@ public class CurrentUserController {
      *
      * @return 当前用户ID等信息
      */
+    @Operation(summary = "获取当前登录用户信息", description = "根据 JWT 令牌返回当前用户的基本信息（用户ID等）")
     @GetMapping("/me")
     public ResponseEntity<ApiResponse<Map<String, Object>>> me() {
         Long uid = CurrentUser.getUserId();

@@ -4,6 +4,7 @@ import com.example.firstproject.common.ApiResponse;
 import com.example.firstproject.dto.ToggleStatusRequest;
 import com.example.firstproject.security.RequirePerm;
 import com.example.firstproject.service.RbacStatusService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -35,6 +36,7 @@ public class RbacStatusController {
      * @param req      状态变更请求
      * @return 操作结果
      */
+    @Operation(summary = "设置角色启用/禁用状态", description = "切换指定角色的启用状态，superadmin 角色不可禁用")
     @PutMapping("/roles/{roleCode}")
     public ResponseEntity<ApiResponse<Void>> setRoleStatus(@PathVariable String roleCode,
                                                            @Valid @RequestBody ToggleStatusRequest req) {
@@ -52,6 +54,7 @@ public class RbacStatusController {
      * @param req      状态变更请求
      * @return 操作结果
      */
+    @Operation(summary = "设置权限启用/禁用状态", description = "切换指定权限的启用状态")
     @PutMapping("/permissions/{permCode}")
     public ResponseEntity<ApiResponse<Void>> setPermissionStatus(@PathVariable String permCode,
                                                                  @Valid @RequestBody ToggleStatusRequest req) {

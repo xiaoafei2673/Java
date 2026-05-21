@@ -3,6 +3,7 @@ package com.example.firstproject.controller;
 import com.example.firstproject.common.ApiResponse;
 import com.example.firstproject.security.CurrentUser;
 import com.example.firstproject.security.RequirePerm;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,6 +29,7 @@ public class RbacDemoController {
      *
      * @return 当前用户ID及操作信息
      */
+    @Operation(summary = "查看用户（演示 user:view 权限）", description = "演示需要 user:view 权限的接口访问控制")
     @GetMapping("/view-users")
     @RequirePerm("user:view")
     public ApiResponse<Map<String, Object>> viewUsers() {
@@ -42,6 +44,7 @@ public class RbacDemoController {
      *
      * @return 当前用户ID及操作信息
      */
+    @Operation(summary = "创建用户（演示 user:create 权限）", description = "演示需要 user:create 权限的接口访问控制")
     @PostMapping("/create-user")
     @RequirePerm("user:create")
     public ApiResponse<Map<String, Object>> createUser() {

@@ -5,6 +5,7 @@ import com.example.firstproject.dto.LoginRequest;
 import com.example.firstproject.dto.LoginResponse;
 import com.example.firstproject.dto.RegisterRequest;
 import com.example.firstproject.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -38,6 +39,7 @@ public class UserAuthController {
      * @param request 注册请求（包含用户名、密码等）
      * @return 注册结果，状态码 201
      */
+    @Operation(summary = "用户注册", description = "注册新用户账号，成功后自动分配默认角色")
     @PostMapping("/register")
     public ResponseEntity<ApiResponse<Void>> register(@Valid @RequestBody RegisterRequest request) {
         userService.register(request);
@@ -52,6 +54,7 @@ public class UserAuthController {
      * @param request 登录请求（用户名、密码）
      * @return 登录结果，包含 JWT 令牌与刷新令牌
      */
+    @Operation(summary = "用户登录", description = "使用用户名和密码登录，成功返回 JWT 令牌与刷新令牌")
     @PostMapping("/login")
     public ResponseEntity<ApiResponse<LoginResponse>> login(@Valid @RequestBody LoginRequest request) {
         LoginResponse response = userService.login(request);
